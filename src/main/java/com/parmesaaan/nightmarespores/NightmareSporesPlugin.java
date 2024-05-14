@@ -53,7 +53,7 @@ public class NightmareSporesPlugin extends Plugin
 	@Inject
 	private Gson gson;
 
-	private final Set<Integer> SPORE_IDS = new HashSet<>(Arrays.asList(ObjectID.SPORE, ObjectID.SPORE_37739, ObjectID.DARK_HOLE_36229));
+	private final Set<Integer> SPORE_IDS = new HashSet<>(Arrays.asList(ObjectID.SPORE, ObjectID.SPORE_37739));
 
 	@Getter(AccessLevel.PACKAGE)
 	private final List<TileObject> foundSpores = new ArrayList<>();
