@@ -64,8 +64,9 @@ public class NightmareSporesOverlay extends Overlay
                 WorldPoint worldPoint = sporeObject.getWorldLocation();
                 LocalPoint localPoint = LocalPoint.fromWorld(client, worldPoint.getX() - 1, worldPoint.getY() - 1);
 
-                if(localPoint == null) {
-                    return null;
+                if(localPoint == null)
+                {
+                    continue;
                 }
 
                 LocalPoint centerLocalPoint = new LocalPoint(
@@ -74,11 +75,14 @@ public class NightmareSporesOverlay extends Overlay
 
                 Polygon tilePoly = Perspective.getCanvasTileAreaPoly(client, centerLocalPoint, 3);
 
-                if(tilePoly != null) {
-                    Stroke stroke = new BasicStroke((float) config.borderWidth());
-                    Color fillColor = MoreObjects.firstNonNull(config.fillColor(), new Color(0, 0, 0, 50));
-                    OverlayUtil.renderPolygon(graphics, tilePoly, config.highlightColor(), fillColor, stroke);
+                if(tilePoly == null)
+                {
+                    continue;
                 }
+
+                Stroke stroke = new BasicStroke((float) config.borderWidth());
+                Color fillColor = MoreObjects.firstNonNull(config.fillColor(), new Color(0, 0, 0, 50));
+                OverlayUtil.renderPolygon(graphics, tilePoly, config.highlightColor(), fillColor, stroke);
             }
         }
 
