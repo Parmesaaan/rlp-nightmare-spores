@@ -1,5 +1,6 @@
 package com.parmesaaan.nightmarespores;
 
+import net.runelite.client.config.Alpha;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
@@ -49,10 +50,8 @@ public interface NightmareSporesConfig extends Config
 			name = "Fill color",
 			description = "The fill colour of the highlight tiles"
 	)
-	default Color fillColor()
-	{
-		return new Color(0, 0, 0, 50);
-	}
+	@Alpha
+	Color fillColor();
 
 	@ConfigItem(
 			position = 4,

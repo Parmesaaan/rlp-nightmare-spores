@@ -56,7 +56,7 @@ public class NightmareSporesPlugin extends Plugin
 	private final Set<Integer> SPORE_IDS = new HashSet<>(Arrays.asList(ObjectID.SPORE, ObjectID.SPORE_37739, ObjectID.DARK_HOLE_36229));
 
 	@Getter(AccessLevel.PACKAGE)
-	private final List<ColorSpore> foundSpores = new ArrayList<>();
+	private final List<TileObject> foundSpores = new ArrayList<>();
 
 	@Provides
 	NightmareSporesConfig provideConfig(ConfigManager configManager) {
@@ -80,7 +80,7 @@ public class NightmareSporesPlugin extends Plugin
 
 	@Subscribe
 	public void onGameObjectDespawned(GameObjectDespawned event) {
-		foundSpores.removeIf(spore -> spore.getTileObject() == event.getGameObject());
+		foundSpores.removeIf(spore -> spore == event.getGameObject());
 	}
 
 	@Subscribe
@@ -97,7 +97,7 @@ public class NightmareSporesPlugin extends Plugin
 		ObjectComposition objectComposition = client.getObjectDefinition(object.getId());
 		if(SPORE_IDS.contains(objectComposition.getId())) {
 			log.debug("Found spore {}", object);
-			foundSpores.add(new ColorSpore(object, objectComposition));
+			foundSpores.add(object);
 		}
 	}
 }

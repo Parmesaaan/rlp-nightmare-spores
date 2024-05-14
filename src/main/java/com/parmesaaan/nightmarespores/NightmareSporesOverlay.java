@@ -1,5 +1,6 @@
 package com.parmesaaan.nightmarespores;
 
+import com.google.common.base.MoreObjects;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Perspective;
@@ -45,23 +46,22 @@ public class NightmareSporesOverlay extends Overlay
             return null;
         }
 
-        for(ColorSpore spore : objects)
+        for(TileObject sporeObject : objects)
         {
-            TileObject object = spore.getTileObject();
 
-            if (object.getPlane() != client.getPlane())
+            if (sporeObject.getPlane() != client.getPlane())
             {
                 continue;
             }
 
             if(config.highlightOutline())
             {
-                modelOutlineRenderer.drawOutline(object, config.borderWidth(), config.highlightColor(), 0);
+                modelOutlineRenderer.drawOutline(sporeObject, config.borderWidth(), config.highlightColor(), 0);
             }
 
             if(config.highlightDangerTiles())
             {
-                WorldPoint worldPoint = object.getWorldLocation();
+                WorldPoint worldPoint = sporeObject.getWorldLocation();
                 LocalPoint localPoint = LocalPoint.fromWorld(client, worldPoint.getX() - 1, worldPoint.getY() - 1);
 
                 if(localPoint == null) {
@@ -76,7 +76,8 @@ public class NightmareSporesOverlay extends Overlay
 
                 if(tilePoly != null) {
                     Stroke stroke = new BasicStroke((float) config.borderWidth());
-                    OverlayUtil.renderPolygon(graphics, tilePoly, config.highlightColor(), config.fillColor(), stroke);
+                    Color fillColor = MoreObjects.firstNonNull(config.fillColor(), new Color(0, 0, 0, 50));
+                    OverlayUtil.renderPolygon(graphics, tilePoly, config.highlightColor(), fillColor, stroke);
                 }
             }
         }
