@@ -22,7 +22,8 @@ import java.util.*;
 
 @Slf4j
 @PluginDescriptor(
-		name = "Nightmare Spores"
+		name = "Nightmare Spores",
+		description = "Highlights danger tiles of Nightmare spores"
 )
 public class NightmareSporesPlugin extends Plugin
 {
